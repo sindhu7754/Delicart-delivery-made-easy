@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../Delicart/User/.git"
+		},
+		{
+			"path": "../Delicart/User/node_modules"
+		},
+		{
+			"path": "../Delicart/User/public"
+		},
+		{
+			"path": "../Delicart/User/src"
+		}
+	]
+}
