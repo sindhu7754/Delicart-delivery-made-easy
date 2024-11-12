@@ -6,7 +6,7 @@ import AuthContext from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 import { updateProfile } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth } from "../firebaseConfig";
 
 const Signup = () => {
   const emailRef = useRef();

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+
 import Order from "../components/BookingRidePage/order";
 
 const RequestRide = () => {
@@ -6,7 +7,7 @@ const RequestRide = () => {
     <Fragment>
       <section className="w-[100vw] h-[100vh] relative flex flex-col bg-transparent">
         <div>
-         <Order/> 
+          <Order />
         </div>
       </section>
     </Fragment>

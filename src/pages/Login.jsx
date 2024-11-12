@@ -9,12 +9,12 @@ import { Oval } from "react-loader-spinner";
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { logInUser, googleSignUpUser, loading, setLoading } =
-    useContext(AuthContext);
+  const { logInUser, googleSignUpUser, loading, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState();
   const [togglePassword, setTogglePassword] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isAgent, setIsAgent] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,25 +23,30 @@ const Login = () => {
 
     try {
       if (emailInput.trim() === "" || passwordInput.trim() === "") {
-        toast.error("Please Enter All Required Field");
+        toast.error("Please Enter All Required Fields");
       } else if (isAdmin) {
         // Admin login check
         if (emailInput === "admin@example.com" && passwordInput === "adminPass") {
-          // Redirect to admin panel
-          navigate("/admin-panel");
+          navigate("/Admin"); // Redirect to admin panel
         } else {
           toast.error("Invalid admin credentials");
+        }
+      } else if (isAgent) {
+        // Agent login check
+        if (emailInput === "agent@example.com" && passwordInput === "agentPass") {
+          navigate("/Agent"); // Redirect to agent panel
+        } else {
+          toast.error("Invalid agent credentials");
         }
       } else {
         // Regular user login
         const response = await logInUser(emailInput, passwordInput);
         if (response.user) {
           setLoading(false);
-          navigate("/ride");
+          navigate("/");
         } else {
           setLoading(false);
           toast.error("Login Was Not Successful");
-          return;
         }
       }
     } catch (error) {
@@ -55,7 +60,7 @@ const Login = () => {
       const response = await googleSignUpUser();
       if (response.user) {
         setLoading(false);
-        navigate("/ride");
+        navigate("/");
       } else {
         setLoading(false);
         toast.error("Login Was Not Successful");
@@ -77,8 +82,7 @@ const Login = () => {
               </p>
               <p className="my-1 text-4xl sm:text-5xl">Delicart Account</p>
               <p className="my-4">
-                We Manage your goods efficiently - No matter the goods or the
-                locations.
+                We Manage your goods efficiently - No matter the goods or the locations.
               </p>
             </div>
             <form onSubmit={handleSubmit}>
@@ -97,22 +101,17 @@ const Login = () => {
                   Password
                 </label>
                 <div className="borderCols w-full p-2 rounded-md flex justify-between items-center">
-                  {" "}
                   <input
                     type={togglePassword ? "text" : "password"}
                     value={showPassword}
                     placeholder="Enter Your Password"
                     className="bg-transparent outline-none w-full"
-                    onChange={(e) => {
-                      setShowPassword(e.target.value);
-                    }}
+                    onChange={(e) => setShowPassword(e.target.value)}
                     ref={passwordRef}
                   />
                   <div
                     className="cursor-pointer"
-                    onClick={() => {
-                      setTogglePassword(!togglePassword);
-                    }}
+                    onClick={() => setTogglePassword(!togglePassword)}
                   >
                     {togglePassword ? <AiFillEye /> : <AiFillEyeInvisible />}
                   </div>
@@ -122,15 +121,27 @@ const Login = () => {
                   <input
                     type="checkbox"
                     checked={isAdmin}
-                    onChange={() => setIsAdmin(!isAdmin)}
+                    onChange={() => {
+                      setIsAdmin(!isAdmin);
+                      setIsAgent(false); // Deselect agent if admin is selected
+                    }}
                   />
                   <span className="ml-2">Admin Login</span>
                 </label>
 
-                <Link
-                  to="/reset-password"
-                  className="text-center my-2 text-blue-700 w-full"
-                >
+                <label className="mt-3">
+                  <input
+                    type="checkbox"
+                    checked={isAgent}
+                    onChange={() => {
+                      setIsAgent(!isAgent);
+                      setIsAdmin(false); // Deselect admin if agent is selected
+                    }}
+                  />
+                  <span className="ml-2">Agent Login</span>
+                </label>
+
+                <Link to="/reset-password" className="text-center my-2 text-blue-700 w-full">
                   Forgot Password?
                 </Link>
                 <button

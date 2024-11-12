@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth } from "../firebaseConfig";
 
 const AuthContext = createContext({
   signOutUser: () => {},

@@ -108,6 +108,21 @@ const Navbar = () => {
                   </Link>
           
                 </div>
+                <div
+                  className={`${
+                    toggleService && "relative top-20 lg:top-0"
+                  } flex flex-col lg:flex-row space-y-8 lg:space-y-0  lg:space-x-12`}
+                >
+                  <Link
+                    to="/History"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                   History
+                  </Link>
+          
+                </div>               
               </ul>
             </div>
             <div

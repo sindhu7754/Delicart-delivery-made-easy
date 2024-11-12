@@ -14,7 +14,11 @@ import RequestRide from "./pages/RequestRide";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ForgotPassword from "./pages/ForgotPassword";
-
+import Payment from "./components/BookingRidePage/Payment";
+import Checkout from "./components/BookingRidePage/checkout";
+import Admin from "./pages/Admin";
+import Agent from "./pages/Agent";
+import History from "./History";
 
 function App() {
   return (
@@ -44,8 +48,12 @@ function App() {
             <Route path="/security" element={<Security />} />
             <Route path="/privacynotice" element={<PrivacyNotice />} />
             <Route path="/ride" element={<RequestRide />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/Admin" element={<Admin />} />
+            <Route path="/Agent" element={<Agent />} />
+            <Route path="/History" element={<History/>} />
 
-           
           </Routes>
         </AuthProvider>
       </div>
